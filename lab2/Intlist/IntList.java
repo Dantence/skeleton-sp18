@@ -5,7 +5,7 @@ import java.util.Formatter;
  * with a large number of additional methods.
  *
  * @author P. N. Hilfinger, with some modifications by Josh Hug and melaniecebula
- *         [Do not modify this file.]
+ * [Do not modify this file.]
  */
 public class IntList {
     /**
@@ -29,7 +29,7 @@ public class IntList {
      * A List with null rest, and first = 0.
      */
     public IntList() {
-    /* NOTE: public IntList () { }  would also work. */
+        /* NOTE: public IntList () { }  would also work. */
         this(0, null);
     }
 
@@ -81,8 +81,12 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        IntList p = A;
+        while (p.rest != null) {
+            p = p.rest;
+        }
+        p.rest = B;
+        return A;
     }
 
     /**
@@ -90,23 +94,43 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        IntList copyOfA = null;
+        IntList copyOfB = null;
+        IntList ptrA = null;
+        IntList ptrB = null;
+
+        if (A != null) {
+            copyOfA = new IntList(A.first, null);
+            ptrA = copyOfA;
+            A = A.rest;
+            while (A != null) {
+                ptrA.rest = new IntList(A.first, null);
+                A = A.rest;
+                ptrA = ptrA.rest;
+            }
+        }
+
+        if (B != null) {
+            copyOfB = new IntList(B.first, null);
+            ptrB = copyOfB;
+            B = B.rest;
+            while (B != null) {
+                ptrB.rest = new IntList(B.first, null);
+                B = B.rest;
+                ptrB = ptrB.rest;
+            }
+        }
+        if (copyOfA == null && copyOfB == null) {
+            return null;
+        } else if (copyOfA == null) {
+            return copyOfB;
+        } else if (copyOfB == null) {
+            return copyOfA;
+        } else {
+            ptrA.rest = copyOfB;
+            return copyOfA;
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /**
