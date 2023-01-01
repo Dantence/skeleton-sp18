@@ -13,7 +13,7 @@ public class TestCalcForceExertedByXY {
     }
 
 
-    /** Checks whether two doubles are approximately equal. 
+    /** Checks whether two doubles are approximately equal.
      *  @param  expected    Expected double
      *  @param  actual      Double received
      *  @param  eps         Tolerance for the double comparison.
