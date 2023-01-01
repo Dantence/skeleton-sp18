@@ -49,7 +49,7 @@ public class Planet {
     /**
      * The gravitational constant
      */
-    public static final double G = 6.67e-11;
+    private static final double G = 6.67e-11;
 
     public Planet(double xP, double yP, double xV, double yV, double m, String img) {
         xxPos = xP;
@@ -114,7 +114,7 @@ public class Planet {
         return Fy;
     }
 
-    void update(double dt, double Fx, double Fy) {
+    public void update(double dt, double Fx, double Fy) {
         double ax = Fx / this.mass;
         double ay = Fy / this.mass;
         this.xxVel += dt * ax;
@@ -123,7 +123,7 @@ public class Planet {
         this.yyPos += dt * this.yyVel;
     }
 
-    void draw() {
+    public void draw() {
         StdDraw.picture(xxPos, yyPos, "images/" + imgFileName);
     }
 }
