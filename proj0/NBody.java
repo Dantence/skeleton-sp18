@@ -70,7 +70,7 @@ public class NBody {
             }
             StdDraw.show();
             StdDraw.pause(10);
-            t += 1;
+            t += 10;
         }
         StdOut.printf("%d\n", planets.length);
         StdOut.printf("%.2e\n", radius);
