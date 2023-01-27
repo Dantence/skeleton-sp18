@@ -15,7 +15,7 @@ import java.util.Arrays;
  * @date: 2023/1/27 15:24
  * @version: 1.0
  */
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> {
 
     private T[] arr;
     private int size;
@@ -33,55 +33,54 @@ public class ArrayDeque<T> implements Deque<T> {
         tail = capacity / 2;
     }
 
-    private void resizeLarger(){
-        T[] new_arr = (T[]) new Object[capacity * 2];
+    private void resizeLarger() {
+        T[] newArr = (T[]) new Object[capacity * 2];
         int index = 1;
 
         int i;
-        if (head == capacity - 1){
+        if (head == capacity - 1) {
             i = 0;
         } else {
             i = head + 1;
         }
         while (i != tail) {
-            new_arr[index] = arr[i];
+            newArr[index] = arr[i];
             i += 1;
             index += 1;
             if (i >= capacity) {
                 i = 0;
             }
         }
-        arr = new_arr;
+        arr = newArr;
         head = 0;
         tail = size + 1;
         capacity *= 2;
     }
 
-    private void resizeSmaller(){
-        T[] new_arr = (T[]) new Object[capacity / 2];
+    private void resizeSmaller() {
+        T[] newArr = (T[]) new Object[capacity / 2];
         int index = 1;
 
         int i;
-        if (head == capacity - 1){
+        if (head == capacity - 1) {
             i = 0;
         } else {
             i = head + 1;
         }
         while (i != tail) {
-            new_arr[index] = arr[i];
+            newArr[index] = arr[i];
             i += 1;
             index += 1;
             if (i >= capacity) {
                 i = 0;
             }
         }
-        arr = new_arr;
+        arr = newArr;
         head = 0;
         tail = size + 1;
         capacity /= 2;
     }
 
-    @Override
     public void addFirst(T item) {
         if (size >= capacity - 1) {
             resizeLarger();
@@ -94,7 +93,6 @@ public class ArrayDeque<T> implements Deque<T> {
         size += 1;
     }
 
-    @Override
     public void addLast(T item) {
         if (size >= capacity) {
             resizeLarger();
@@ -108,20 +106,17 @@ public class ArrayDeque<T> implements Deque<T> {
 
     }
 
-    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
-    @Override
     public int size() {
         return size;
     }
 
-    @Override
     public void printDeque() {
         int i;
-        if (head == capacity - 1){
+        if (head == capacity - 1) {
             i = 0;
         } else {
             i = head + 1;
@@ -134,9 +129,8 @@ public class ArrayDeque<T> implements Deque<T> {
         }
     }
 
-    @Override
     public T removeFirst() {
-        if (size == 0){
+        if (size == 0) {
             return null;
         }
         T item = arr[head];
@@ -145,15 +139,14 @@ public class ArrayDeque<T> implements Deque<T> {
             head = 0;
         }
         size -= 1;
-        if (size / (double) capacity <= lowestUsingRate && capacity > threshold){
+        if (size / (double) capacity <= lowestUsingRate && capacity > threshold) {
             resizeSmaller();
         }
         return item;
     }
 
-    @Override
     public T removeLast() {
-        if (size == 0){
+        if (size == 0) {
             return null;
         }
         T item = arr[tail];
@@ -162,24 +155,23 @@ public class ArrayDeque<T> implements Deque<T> {
             tail = capacity - 1;
         }
         size -= 1;
-        if (size / (double) capacity <= lowestUsingRate && capacity > threshold){
+        if (size / (double) capacity <= lowestUsingRate && capacity > threshold) {
             resizeSmaller();
         }
         return item;
     }
 
-    @Override
     public T get(int index) {
         int cnt = 0;
 
         int i;
-        if (head == capacity - 1){
+        if (head == capacity - 1) {
             i = 0;
         } else {
             i = head + 1;
         }
         while (i != tail) {
-            if (cnt == index){
+            if (cnt == index) {
                 return arr[i];
             }
             cnt += 1;
