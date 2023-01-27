@@ -4,8 +4,6 @@
  * @date 2023/1/27
  */
 
-import java.util.Arrays;
-
 /**
  * @projectName: proj1a
  * @package: PACKAGE_NAME
@@ -133,11 +131,12 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        T item = arr[head];
+
         head += 1;
         if (head >= capacity) {
             head = 0;
         }
+        T item = arr[head];
         size -= 1;
         if (size / (double) capacity <= lowestUsingRate && capacity > threshold) {
             resizeSmaller();
@@ -149,11 +148,12 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        T item = arr[tail];
+
         tail -= 1;
         if (tail <= 0) {
             tail = capacity - 1;
         }
+        T item = arr[tail];
         size -= 1;
         if (size / (double) capacity <= lowestUsingRate && capacity > threshold) {
             resizeSmaller();

@@ -14,7 +14,15 @@
 // * @version: 1.0
 // */
 //public class ArrayDequeTest {
+//    public static void addRemoveTest(){
+//        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
+//        for(int i = 0; i<= 10;i++){
+//            arrayDeque.addFirst(i);
+//        }
 //
+//        System.out.println(arrayDeque.removeLast());
+//
+//    }
 //    public static void addPrintTest(){
 //        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
 //        arrayDeque.addLast(10);
@@ -48,6 +56,7 @@
 //    public static void main(String[] args) {
 //        System.out.println("Running tests.\n");
 //        //addPrintTest();
-//        resizeTest();
+//        //resizeTest();
+//        addRemoveTest();
 //    }
 //}
