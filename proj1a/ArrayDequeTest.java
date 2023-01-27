@@ -16,11 +16,17 @@
 //public class ArrayDequeTest {
 //    public static void addRemoveTest(){
 //        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
-//        for(int i = 0; i<= 10;i++){
-//            arrayDeque.addFirst(i);
-//        }
+//        arrayDeque.addFirst(0);
+//        arrayDeque.addFirst(1);
+//        arrayDeque.removeLast();
+//        arrayDeque.removeLast();
+//        arrayDeque.addFirst(4);
+//        arrayDeque.get(0);
+//        arrayDeque.removeLast();
 //
-//        System.out.println(arrayDeque.removeLast());
+//        arrayDeque.addFirst(7);
+//        arrayDeque.removeLast();
+//
 //
 //    }
 //    public static void addPrintTest(){

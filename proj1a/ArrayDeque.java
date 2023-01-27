@@ -150,7 +150,7 @@ public class ArrayDeque<T> {
         }
 
         tail -= 1;
-        if (tail <= 0) {
+        if (tail < 0) {
             tail = capacity - 1;
         }
         T item = arr[tail];
