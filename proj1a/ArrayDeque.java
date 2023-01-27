@@ -92,7 +92,7 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-        if (size >= capacity) {
+        if (size >= capacity - 1) {
             resizeLarger();
         }
         arr[tail] = item;
@@ -113,6 +113,11 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
+        System.out.print("head: " + head);
+        System.out.print(" tail: " + tail);
+        System.out.print(" size: " + size);
+        System.out.println(" cap: " + capacity);
+
         int i;
         if (head == capacity - 1) {
             i = 0;
@@ -120,11 +125,14 @@ public class ArrayDeque<T> {
             i = head + 1;
         }
         while (i != tail) {
+            System.out.print(arr[i]);
+            System.out.print(" ");
             i += 1;
             if (i >= capacity) {
                 i = 0;
             }
         }
+        System.out.println("\n");
     }
 
     public T removeFirst() {

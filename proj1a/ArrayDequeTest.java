@@ -4,6 +4,8 @@
 // * @date 2023/1/27
 // */
 //
+//import java.util.Random;
+//
 ///**
 // * @projectName: proj1a
 // * @package: PACKAGE_NAME
@@ -59,10 +61,40 @@
 //        System.out.println("size: " + arrayDeque.size());
 //        System.out.println("index 1: " + arrayDeque.get(1));
 //    }
+//
+//    public static void randomTest(){
+//        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
+//        Random r = new Random(1);
+//        for(int i = 0; i < 50; i++){
+//
+//            System.out.println("the " + i + "th operation:");
+//            double rate = r.nextDouble();
+//            if(rate < 0.25){
+//                int item = r.nextInt(100);
+//                System.out.println("addLast: " + item);
+//                arrayDeque.addLast(item);
+//            } else if(rate < 0.5){
+//                int item = r.nextInt(100);
+//                System.out.println("addFirst: " + item);
+//                arrayDeque.addFirst(item);
+//            } else if(rate < 0.75){
+//                System.out.println("removeLast");
+//                arrayDeque.removeLast();
+//            } else {
+//                System.out.println("removeFirst");
+//                arrayDeque.removeFirst();
+//            }
+//            System.out.print("now: ");
+//            arrayDeque.printDeque();
+//        }
+//
+//    }
+//
 //    public static void main(String[] args) {
 //        System.out.println("Running tests.\n");
 //        //addPrintTest();
 //        //resizeTest();
-//        addRemoveTest();
+//        randomTest();
+//        //addRemoveTest();
 //    }
 //}
