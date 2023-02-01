@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import lab9.BSTMap;
 
+import java.util.Random;
+import java.util.Set;
+
 /**
  * Tests by Brendan Hu, Spring 2015, revised for 2018 by Josh Hug
  */
@@ -84,6 +87,22 @@ public class TestBSTMap {
         b.put("hi", 1);
         assertTrue(b.containsKey("hi"));
         assertTrue(b.get("hi") != null);
+    }
+
+    @Test
+    public void randomTest() {
+        BSTMap<Integer, Integer> b = new BSTMap<>();
+        b.put(10, 1);
+        b.put(6, 2);
+        b.put(9, 3);
+        b.put(12, 4);
+        b.put(15, 5);
+        b.put(13, 6);
+        b.put(4, 7);
+        b.put(11, 8);
+        for(Integer key : b) {
+            System.out.println("{" + key + ", " + b.get(key) + "}");
+        }
     }
 
     public static void main(String[] args) {
