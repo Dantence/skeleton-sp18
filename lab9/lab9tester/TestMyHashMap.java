@@ -127,6 +127,18 @@ public class TestMyHashMap {
         assertEquals(studentIDs.get("evil alan"), studentIDs.get("alan"));
     }
 
+    @Test
+    public void iteratorTest() {
+        MyHashMap<Integer, Integer> hashMap = new MyHashMap<Integer, Integer>();
+        for(int i = 1; i <= 20; i++) {
+            hashMap.put(i, i);
+        }
+        for(Integer key : hashMap) {
+            System.out.println("{" + key + ", " + hashMap.get(key) + "}");
+        }
+
+    }
+
     public static void main(String[] args) {
         jh61b.junit.TestRunner.runTests(TestMyHashMap.class);
     }
