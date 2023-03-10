@@ -14,17 +14,23 @@ public class Router {
     private static final Map<Long, Double> dist = new HashMap<>();
     private static final Map<Long, Boolean> visited = new HashMap<>();
 
+    public static double sigmod(double x) {
+        return 1 / (1 + Math.exp(-x));
+    }
+
     static class Pair implements Comparable<Pair> {
         Long id;
         Double distance;
+        Double f;
 
-        Pair(Double distance, Long id) {
+        Pair(Double distance, Long id, Double f) {
             this.distance = distance;
             this.id = id;
+            this.f = f;
         }
         @Override
         public int compareTo(Pair o) {
-            return this.distance.compareTo(o.distance);
+            return this.f.compareTo(o.f);
         }
     }
 
@@ -46,13 +52,17 @@ public class Router {
         Long destNode = g.closest(destlon, destlat);
         Map<Long, Long> path = new HashMap<>();
         Map<Long, GraphDB.Node> nodes = g.getNodes();
+
+
         for(Long id : nodes.keySet()) {
             dist.put(id, Double.MAX_VALUE);
             visited.put(id, Boolean.FALSE);
+
         }
+
         dist.put(startNode, 0.0);
         PriorityQueue<Pair> heap = new PriorityQueue<>();
-        heap.add(new Pair(0.0, startNode));
+        heap.add(new Pair(0.0, startNode, 0.0));
         while (!heap.isEmpty()) {
             Pair pair = heap.poll();
             double distance = pair.distance;
@@ -65,8 +75,12 @@ public class Router {
                 double w = g.distance(id, adjacent);
                 if(dist.get(adjacent) > distance + w) {
                     dist.put(adjacent, distance + w);
-                    heap.add(new Pair(dist.get(adjacent), adjacent));
+                    heap.add(new Pair(dist.get(adjacent), adjacent, distance + w + g.distance(destNode, adjacent)));
                     path.put(adjacent, id);
+                }
+                if(adjacent.equals(destNode)) {
+                    heap.clear();
+                    break;
                 }
             }
         }
