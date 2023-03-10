@@ -1,5 +1,4 @@
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +11,23 @@ import java.util.regex.Pattern;
  * down to the priority you use to order your vertices.
  */
 public class Router {
+    private static final Map<Long, Double> dist = new HashMap<>();
+    private static final Map<Long, Boolean> visited = new HashMap<>();
+
+    static class Pair implements Comparable<Pair> {
+        Long id;
+        Double distance;
+
+        Pair(Double distance, Long id) {
+            this.distance = distance;
+            this.id = id;
+        }
+        @Override
+        public int compareTo(Pair o) {
+            return this.distance.compareTo(o.distance);
+        }
+    }
+
     /**
      * Return a List of longs representing the shortest path from the node
      * closest to a start location and the node closest to the destination
@@ -25,7 +41,48 @@ public class Router {
      */
     public static List<Long> shortestPath(GraphDB g, double stlon, double stlat,
                                           double destlon, double destlat) {
-        return null; // FIXME
+
+        Long startNode = g.closest(stlon, stlat);
+        Long destNode = g.closest(destlon, destlat);
+        Map<Long, Long> path = new HashMap<>();
+        Map<Long, GraphDB.Node> nodes = g.getNodes();
+        for(Long id : nodes.keySet()) {
+            dist.put(id, Double.MAX_VALUE);
+            visited.put(id, Boolean.FALSE);
+        }
+        dist.put(startNode, 0.0);
+        PriorityQueue<Pair> heap = new PriorityQueue<>();
+        heap.add(new Pair(0.0, startNode));
+        while (!heap.isEmpty()) {
+            Pair pair = heap.poll();
+            double distance = pair.distance;
+            long id = pair.id;
+            if(visited.get(id)) {
+                continue;
+            }
+            visited.put(id, Boolean.TRUE);
+            for (Long adjacent : nodes.get(id).adjacents) {
+                double w = g.distance(id, adjacent);
+                if(dist.get(adjacent) > distance + w) {
+                    dist.put(adjacent, distance + w);
+                    heap.add(new Pair(dist.get(adjacent), adjacent));
+                    path.put(adjacent, id);
+                }
+            }
+        }
+        Long p = destNode;
+        Stack<Long> stack = new Stack<>();
+        List<Long> res = new ArrayList<>();
+        while(!Objects.equals(p, startNode)) {
+            stack.add(p);
+            p = path.get(p);
+        }
+        stack.add(startNode);
+        while (!stack.empty()) {
+            Long pop = stack.pop();
+            res.add(pop);
+        }
+        return res;
     }
 
     /**
